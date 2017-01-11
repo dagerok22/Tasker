@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tasker</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="intro_actionbar_string">GREETING</string>
+    <string name="intro_first_screen_text">Hello, my friend!\n My name is Tasker, i will be helping you, on your way to success</string>
+</resources>
