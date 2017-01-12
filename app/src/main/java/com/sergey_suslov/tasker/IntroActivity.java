@@ -21,8 +21,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
+import mehdi.sakout.fancybuttons.FancyButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -146,7 +148,7 @@ public class IntroActivity extends AppCompatActivity {
                     rootView = inflater.inflate(R.layout.fragment_intro_second, container, false);
                     break;
                 case 3:
-                    rootView = inflater.inflate(R.layout.fragment_intro_first, container, false);
+                    rootView = inflater.inflate(R.layout.fragment_intro_third, container, false);
                     break;
                 default:
                     rootView = inflater.inflate(R.layout.fragment_intro_first, container, false);
@@ -191,7 +193,7 @@ public class IntroActivity extends AppCompatActivity {
                 case 0:
                     return "GREETING";
                 case 1:
-                    return "COVEY MATRIX";
+                    return "COVEY'S MATRIX";
                 case 2:
                     return "GOOD LUCK";
             }

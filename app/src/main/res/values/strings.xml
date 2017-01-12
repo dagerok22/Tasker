@@ -4,4 +4,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="intro_actionbar_string">GREETING</string>
     <string name="intro_first_screen_text">Hello, my friend!\n My name is Tasker, i will be helping you, on your way to success</string>
+    <string name="intro_matrix_description_iu">Important and urgent tasks, requiring your intervention. Solve them as quickly as possible and try to avoid their occurrence.</string>
+    <string name="intro_matrix_description_i">Important and not urgent tasks, do them as soon as they appear. Try to focus on this section, do not allow theme to become ugren ones.</string>
+    <string name="intro_matrix_description_u">Not important, but urgent tasks, this kind of task  can be solved sombody else. As a rule, these problems realize another’s goals. Try to dielegate theme.</string>
+    <string name="intro_matrix_description_ninu">Not important and not urgent tasks. Little things stealing your time. Do these things in the last turn, or do not do at all. </string>
+    <string name="intro_third_screen_quote">Quality is not an act, it\'s a habbit</string>
+    <string name="intro_start_btn_text">Start</string>
 </resources>
