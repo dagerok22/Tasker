@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -20,10 +21,12 @@
         <!-- Custom Attr-->
         <item name="fontPath">fonts/OpenSans-Regular.ttf</item>
     </style>
+
     <style name="OpenSansLightPath" parent="android:TextAppearance">
         <!-- Custom Attr-->
         <item name="fontPath">fonts/OpenSans-Light.ttf</item>
     </style>
+
     <style name="OpenSansLightItalicPath" parent="android:TextAppearance">
         <!-- Custom Attr-->
         <item name="fontPath">fonts/OpenSans-LightItalic.ttf</item>
@@ -37,27 +40,38 @@
     </style>
 
     <style name="IntroMatrixText">
-        <item name="android:textSize">10dp</item>
+        <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/OpenSansLightPath</item>
     </style>
 
     <style name="IntroMatrixDescriptionText">
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/OpenSansLightPath</item>
     </style>
 
     <style name="IntroThirdScreenQuote">
-        <item name="android:textSize">17dp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/OpenSansLightPath</item>
         <item name="android:textAlignment">center</item>
     </style>
 
     <style name="CustomSizeText" parent="@android:style/Widget.Button">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textAppearance">@style/OpenSansLightPath</item>
+    </style>
+
+    <style name="nav_header_logo">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/OpenSansLightItalicPath</item>
+    </style>
+
+    <style name="NoShadowActionBar" parent="android:Theme.Holo.Light">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
     </style>
 
 </resources>
