@@ -25,4 +25,6 @@
     <string name="today_tasks">Today tasks</string>
     <string name="tomorrow_tasks">Tomorrow tasks</string>
     <string name="all_tasks">ALL TASKS</string>
+    <string name="title_activity_new_task">ADD TASK</string>
+    <string name="enter_new_task_hint">Enter a new task...</string>
 </resources>

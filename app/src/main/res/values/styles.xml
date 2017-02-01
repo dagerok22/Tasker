@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -74,4 +75,8 @@
         <item name="elevation">0dp</item>
     </style>
 
+    <style name="add_new_task_hint_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/fadingGray</item>
+    </style>
 </resources>
