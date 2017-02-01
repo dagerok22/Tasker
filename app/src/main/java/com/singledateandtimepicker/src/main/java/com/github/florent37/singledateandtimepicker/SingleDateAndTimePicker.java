@@ -1,4 +1,4 @@
-package com.singledateandtimepicker.src.main.java.com.github.florent37.singledateandtimepicker;
+package com.github.florent37.singledateandtimepicker;
 
 import android.content.Context;
 import android.content.res.Resources;
