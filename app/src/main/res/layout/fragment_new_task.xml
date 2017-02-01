@@ -88,7 +88,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <mehdi.sakout.fancybuttons.FancyButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,9 +129,25 @@
                 fancy:fb_borderWidth="0dp"
                 fancy:fb_defaultColor="#50FFFFFF"
                 fancy:fb_fontIconSize="100dp"
-                fancy:fb_text="Another"
+                fancy:fb_text="Chosen"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <com.github.florent37.singledateandtimepicker.widget.WheelDayPicker
+            android:id="@+id/single_day_picker"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            app:wheel_curtain_color="@color/colorPrimary"
+            app:wheel_item_text_color="@color/white"
+            app:wheel_selected_item_text_color="@color/colorPrimaryDark"
+            app:wheel_atmospheric="true"
+            app:wheel_indicator_size="2dp"
+            app:wheel_item_text_size="16dp"
+            app:picker_curved="false"
+            app:picker_cyclic="false"
+            app:picker_mustBeOnFuture="true"
+            app:picker_visibleItemCount="7"
+            />
 
     </LinearLayout>
 

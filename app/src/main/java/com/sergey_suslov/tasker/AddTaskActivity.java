@@ -2,9 +2,7 @@ package com.sergey_suslov.tasker;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+import java.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +15,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
+import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
 
 import java.util.Date;
 
@@ -28,10 +28,15 @@ public class AddTaskActivity extends AppCompatActivity {
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
 
+    private static final int TODAY_DATE = 0;
+    private static final int TOMORROW_DATE = 1;
+    private static final int CHOSEN_DATE = 2;
+    private int mCurrentDateState;
+
     private Date mTaskDate;
     private FancyButton mTodayDateBtn;
     private FancyButton mTomorrowDateBtn;
-    private FancyButton mAnotherDateBtn;
+    private FancyButton mChosenDateBtn;
 
     private EditText mNewTaskEditText;
 
@@ -54,10 +59,12 @@ public class AddTaskActivity extends AppCompatActivity {
         mIsUrgent = false;
         mIsImportant = false;
 
+        mCurrentDateState = TODAY_DATE;
+
         Calendar todayDate = Calendar.getInstance();
         Calendar tomorrowDate = Calendar.getInstance();
         tomorrowDate.add(Calendar.DAY_OF_MONTH, 1);
-        Calendar anotherDate;
+        Calendar chosenDate;
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -75,7 +82,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
-
+        // New task etid field inimation
         mNewTaskEditText = (EditText) findViewById(R.id.new_task_edit_text) ;
 
         mNewTaskEditText.setSelected(false);
@@ -104,7 +111,11 @@ public class AddTaskActivity extends AppCompatActivity {
                         .start();
             }
         });
+        ///////////
 
+
+
+        // Uregent and Important button dealing
         mUrgentBtn = (FancyButton) findViewById(R.id.urgent_checkbox_btn);
         mImportantBtn = (FancyButton) findViewById(R.id.important_checkbox_btn);
 
@@ -128,40 +139,45 @@ public class AddTaskActivity extends AppCompatActivity {
                     mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
             }
         });
+        ////////////
+
+
+        // Dating
+        WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
+
 
         mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
         mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
-        mAnotherDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
+        mChosenDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
 
         mTodayDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SingleDateAndTimePickerDialog.Builder(getApplicationContext())
-                        //.bottomSheet()
-                        //.curved()
-                        //.minutesStep(15)
-                        .title("Simple")
-                        .listener(new SingleDateAndTimePickerDialog.Listener() {
-                            @Override
-                            public void onDateSelected(Date date) {
-
-                            }
-                        }).display();
+                mCurrentDateState = TODAY_DATE;
+                mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
             }
         });
         mTomorrowDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mCurrentDateState = TOMORROW_DATE;
+                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
             }
         });
-        mAnotherDateBtn.setOnClickListener(new View.OnClickListener() {
+        mChosenDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mCurrentDateState = CHOSEN_DATE;
+                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
             }
         });
-
+        ///////////
 
     }
 
