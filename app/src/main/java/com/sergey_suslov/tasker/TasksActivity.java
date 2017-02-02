@@ -2,11 +2,13 @@ package com.sergey_suslov.tasker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Gravity;
@@ -76,6 +78,8 @@ public class TasksActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.setScrimColor(ContextCompat.getColor(this, R.color.colorDrawerScrim));
+        drawer.setDrawerShadow(R.color.colorTransparent, GravityCompat.START);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -136,6 +140,7 @@ public class TasksActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.setDrawerShadow(R.color.colorTransparent, GravityCompat.START);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

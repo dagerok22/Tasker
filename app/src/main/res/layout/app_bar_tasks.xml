@@ -41,7 +41,9 @@
     <include layout="@layout/content_tasks" />
 
     <android.support.design.widget.FloatingActionButton
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimaryActive"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
         android:id="@+id/newTask_floating_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +52,9 @@
         app:srcCompat="@drawable/ic_plus" />
 
     <android.support.design.widget.FloatingActionButton
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimaryActive"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
         android:id="@+id/deleteDone_floating_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -31,7 +31,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private static final int TODAY_DATE = 0;
     private static final int TOMORROW_DATE = 1;
     private static final int CHOSEN_DATE = 2;
-    private int mCurrentDateState;
+    private int mCurrentDateState = TODAY_DATE;
 
     private Date mTaskDate;
     private FancyButton mTodayDateBtn;
@@ -40,8 +40,9 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private EditText mNewTaskEditText;
 
-    private String mActiveColor = "#D0E4866A";
-    private String mPassiveColor = "#50FFFFFF";
+    private String mActiveColor = "#50FFFFFF";
+//    private String mActiveColor = "#80C5725A";
+    private String mPassiveColor = "#80C5725A";
 
     private Boolean mIsUrgent;
     private Boolean mIsImportant;
@@ -145,11 +146,12 @@ public class AddTaskActivity extends AppCompatActivity {
 
         // Dating
         WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
-
+        wheelDayPicker.setCurved(true);
 
         mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
         mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
         mChosenDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
+        mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
 
         mTodayDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +181,6 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
         ///////////
-
     }
 
 
