@@ -10,7 +10,7 @@
     <color name="colorPrimaryBlueLight">#496985</color>
     <color name="colorPrimaryBlueMiddle">#475e72</color>
     <color name="colorAccent">#DA785C</color>
-    <color name="colorDrawerScrim">#80000000</color>
+    <color name="colorDrawerScrim">#00000000</color>
     <color name="colorTransparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="fadingGray">#999999</color>

@@ -2,17 +2,20 @@ package com.sergey_suslov.tasker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,14 +26,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -43,6 +47,12 @@ public class TasksActivity extends AppCompatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private FeedReaderDbHelper mDbHelper;
+
+    private ArrayList<TaskItem> mDataSet;
+    private RecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
+    private MyTasksAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +87,38 @@ public class TasksActivity extends AppCompatActivity
             }
         });
 
+        // SQLite
+        mDataSet = doQueryForAll();
+        ////
+
+        // Adapter things
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        TaskItem taskItem = mDataSet.get(position);
+                        taskItem.setmStatus(!taskItem.mStatus);
+//                        mAdapter.refreshBlockOverlay(position);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                })
+        );
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyTasksAdapter(mDataSet);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        ///////
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.setScrimColor(ContextCompat.getColor(this, R.color.colorDrawerScrim));
         drawer.setDrawerShadow(R.color.colorTransparent, GravityCompat.START);
@@ -87,6 +129,7 @@ public class TasksActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         Menu m = navigationView.getMenu();
         for (int i = 0; i < m.size(); i++) {
@@ -109,6 +152,42 @@ public class TasksActivity extends AppCompatActivity
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    private ArrayList<TaskItem> doQueryForAll(){
+        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+        SQLiteDatabase readableDatabase = mDbHelper.getReadableDatabase();
+        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME, null, null, null, null, null, FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY  + ", " + FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+
+        ArrayList DataSet = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                TaskItem taskItem = new TaskItem();
+                taskItem.setmTitle(c.getString(1));
+                taskItem.setmDate(c.getString(2));
+                if(c.getInt(3) == 0)
+                    taskItem.setmStatus(false);
+                else
+                    taskItem.setmStatus(true);
+                taskItem.setmPriority(c.getInt(4));
+                DataSet.add(taskItem);
+            }while (c.moveToNext());
+        }
+        c.close();
+        return DataSet;
+    }
+
+    private void updateAdapert(){
+        mAdapter.setNewDate(doQueryForAll());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+            // Make sure the request was successful
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(getApplicationContext(), "Task added", Toast.LENGTH_SHORT).show();
+            updateAdapert();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -156,6 +235,7 @@ public class TasksActivity extends AppCompatActivity
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

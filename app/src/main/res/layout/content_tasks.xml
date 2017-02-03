@@ -13,32 +13,12 @@
     tools:context="com.sergey_suslov.tasker.TasksActivity"
     tools:showIn="@layout/app_bar_tasks">
 
-    <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--app:srcCompat="@drawable/ic_penguin"-->
-            <!--android:id="@+id/tasks_cap_imageView"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:visibility="invisible" />-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--app:srcCompat="@drawable/mountain_fog_long"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:id="@+id/imageView12" />-->
-
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:padding="16dp">-->
-
-        <!--</RelativeLayout>-->
-    <!--</FrameLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

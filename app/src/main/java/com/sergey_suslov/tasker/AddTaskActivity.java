@@ -1,8 +1,13 @@
 package com.sergey_suslov.tasker;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker;
-import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
 
 import java.util.Date;
+import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -27,6 +29,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
+    private FancyButton mCreateTaskBtn;
 
     private static final int TODAY_DATE = 0;
     private static final int TOMORROW_DATE = 1;
@@ -34,6 +37,9 @@ public class AddTaskActivity extends AppCompatActivity {
     private int mCurrentDateState = TODAY_DATE;
 
     private Date mTaskDate;
+    private Date mTodayDate;
+    private Date mTomorrowDate;
+    private Date mChosenDate;
     private FancyButton mTodayDateBtn;
     private FancyButton mTomorrowDateBtn;
     private FancyButton mChosenDateBtn;
@@ -41,17 +47,27 @@ public class AddTaskActivity extends AppCompatActivity {
     private EditText mNewTaskEditText;
 
     private String mActiveColor = "#50FFFFFF";
-//    private String mActiveColor = "#80C5725A";
+    //    private String mActiveColor = "#80C5725A";
     private String mPassiveColor = "#80C5725A";
 
     private Boolean mIsUrgent;
     private Boolean mIsImportant;
 
+    private SQLiteDatabase db;
+
+
+
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         mNewTaskEditText.clearFocus();
+    }
+
+    public static Calendar toCalendar(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 
     @Override
@@ -60,13 +76,16 @@ public class AddTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_task);
         mIsUrgent = false;
         mIsImportant = false;
+        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(getApplicationContext());
 
-        mCurrentDateState = TODAY_DATE;
+        setResult(RESULT_CANCELED);
 
-        Calendar todayDate = Calendar.getInstance();
-        Calendar tomorrowDate = Calendar.getInstance();
-        tomorrowDate.add(Calendar.DAY_OF_MONTH, 1);
-        Calendar chosenDate;
+        mTodayDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        mTomorrowDate = cal.getTime();
+        mTaskDate = mTodayDate;
+
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -80,25 +99,25 @@ public class AddTaskActivity extends AppCompatActivity {
         newTask_floating_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "BackPressed", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
 
+
         // New task etid field inimation
-        mNewTaskEditText = (EditText) findViewById(R.id.new_task_edit_text) ;
+        mNewTaskEditText = (EditText) findViewById(R.id.new_task_edit_text);
 
         mNewTaskEditText.setSelected(false);
         mNewTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            Animation animation;
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 Log.d("Animation edittext", String.valueOf(hasFocus));
                 EditText et = (EditText) v;
                 float alpha;
-                if(hasFocus){
+                if (hasFocus) {
                     alpha = 0.9f;
-                }
-                else{
+                } else {
                     alpha = 0.5f;
                     hideKeyboard(v);
                 }
@@ -114,7 +133,6 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
         ///////////
-
 
 
         // Uregent and Important button dealing
@@ -145,7 +163,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // Dating
-        WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
+        final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
         wheelDayPicker.setCurved(true);
 
         mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
@@ -181,7 +199,63 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
         ///////////
+
+        db = mDbHelper.getWritableDatabase();
+
+        // Create task
+        mCreateTaskBtn = (FancyButton) findViewById(R.id.finish_add_task_btn);
+
+        mCreateTaskBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String title = mNewTaskEditText.getText().toString();
+                Integer priority = 4;
+                if (mIsUrgent && mIsImportant)
+                    priority = 1;
+                else if (mIsUrgent)
+                    priority = 3;
+                else if (mIsImportant)
+                    priority = 2;
+
+                switch (mCurrentDateState) {
+                    case TODAY_DATE:
+                        mTaskDate = mTodayDate;
+                        break;
+                    case TOMORROW_DATE:
+                        mTaskDate = mTomorrowDate;
+                        break;
+                    case CHOSEN_DATE:
+                        mTaskDate = wheelDayPicker.getCurrentDate();
+                        break;
+                    default:
+                        mTaskDate = mTodayDate;
+                        break;
+                }
+
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                String formatted = format.format(mTaskDate);
+
+                ContentValues values = new ContentValues();
+                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
+                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY, priority);
+                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, formatted);
+                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS, 0);
+                long newRowId = db.insert(
+                        FeedReaderContract.FeedEntry.TABLE_NAME,
+                        FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
+                        values);
+                Log.d("mTaskDate newRowId", String.valueOf(newRowId));
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
+
+        ///////////
     }
 
-
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_CANCELED);
+        finish();
+//        super.onBackPressed();
+    }
 }
