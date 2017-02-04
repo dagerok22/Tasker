@@ -1,5 +1,6 @@
 package com.sergey_suslov.tasker;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -36,6 +38,14 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.FadeInAnimator;
+import jp.wasabeef.recyclerview.animators.FadeInDownAnimator;
+import jp.wasabeef.recyclerview.animators.FlipInBottomXAnimator;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -53,6 +63,7 @@ public class TasksActivity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private MyTasksAdapter mAdapter;
+    private SQLiteDatabase readableDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +89,14 @@ public class TasksActivity extends AppCompatActivity
             }
         });
 
-        FloatingActionButton deleteDone_floating_btn = (FloatingActionButton) findViewById(R.id.deleteDone_floating_btn);
-        deleteDone_floating_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddTaskActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
+//        FloatingActionButton deleteDone_floating_btn = (FloatingActionButton) findViewById(R.id.deleteDone_floating_btn);
+//        deleteDone_floating_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), AddTaskActivity.class);
+//                startActivityForResult(intent, 1);
+//            }
+//        });
 
         // SQLite
         mDataSet = doQueryForAll();
@@ -93,14 +104,18 @@ public class TasksActivity extends AppCompatActivity
 
         // Adapter things
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+//        mRecyclerView.setItemAnimator(new ScaleInAnimator());
+
+        SnapHelper snapHelperTop = new GravitySnapHelper(Gravity.TOP);
+        snapHelperTop.attachToRecyclerView(mRecyclerView);
+
 
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        TaskItem taskItem = mDataSet.get(position);
-                        taskItem.setmStatus(!taskItem.mStatus);
-//                        mAdapter.refreshBlockOverlay(position);
-                        mAdapter.notifyDataSetChanged();
+                        doQueryForDone(mDataSet.get(position).mId);
+                        mDataSet.remove(position);
+                        mAdapter.notifyItemRemoved(position);
                     }
                 })
         );
@@ -109,7 +124,8 @@ public class TasksActivity extends AppCompatActivity
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
@@ -154,13 +170,20 @@ public class TasksActivity extends AppCompatActivity
 
     private ArrayList<TaskItem> doQueryForAll(){
         mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        SQLiteDatabase readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME, null, null, null, null, null, FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY  + ", " + FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+        readableDatabase = mDbHelper.getReadableDatabase();
+        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                null,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0",
+                null,
+                null,
+                null,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
 
         ArrayList DataSet = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 TaskItem taskItem = new TaskItem();
+                taskItem.setmId(c.getInt(0));
                 taskItem.setmTitle(c.getString(1));
                 taskItem.setmDate(c.getString(2));
                 if(c.getInt(3) == 0)
@@ -175,8 +198,18 @@ public class TasksActivity extends AppCompatActivity
         return DataSet;
     }
 
-    private void updateAdapert(){
-        mAdapter.setNewDate(doQueryForAll());
+    private void doQueryForDone(int id){
+        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+        readableDatabase = mDbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS, 1);
+        readableDatabase.update(FeedReaderContract.FeedEntry.TABLE_NAME, contentValues, FeedReaderContract.FeedEntry._ID + "=" + id, null);
+    }
+
+    private void updateAdapter(){
+        ArrayList<TaskItem> newDataset = doQueryForAll();
+        mDataSet = newDataset;
+        mAdapter.setNewDate(mDataSet);
     }
 
     @Override
@@ -184,8 +217,7 @@ public class TasksActivity extends AppCompatActivity
         // Check which request we're responding to
             // Make sure the request was successful
         if (resultCode == RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "Task added", Toast.LENGTH_SHORT).show();
-            updateAdapert();
+            updateAdapter();
         }
     }
 

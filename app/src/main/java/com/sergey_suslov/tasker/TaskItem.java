@@ -7,6 +7,9 @@ import java.util.Date;
  */
 
 public class TaskItem {
+
+
+    public Integer mId;
     public String mTitle;
     public Boolean mStatus;
     public Integer mPriority;
@@ -18,6 +21,10 @@ public class TaskItem {
     public void setmTitle(String mTitle) {
 
         this.mTitle = mTitle;
+    }
+
+    public void setmId(Integer mId) {
+        this.mId = mId;
     }
 
     public void setmStatus(Boolean mStatus) {
