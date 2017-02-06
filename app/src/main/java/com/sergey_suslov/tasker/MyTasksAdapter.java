@@ -51,11 +51,15 @@ public class MyTasksAdapter extends RecyclerView.Adapter<MyTasksAdapter.ViewHold
             int priority = item.mPriority;
             switch (priority){
                 case 1:
+                    mImportantImageView.setAlpha(1.0f);
+                    mUrgentImageView.setAlpha(1.0f);
                     break;
                 case 2:
+                    mImportantImageView.setAlpha(1.0f);
                     mUrgentImageView.setAlpha(0.3f);
                     break;
                 case 3:
+                    mUrgentImageView.setAlpha(1.0f);
                     mImportantImageView.setAlpha(0.3f);
                     break;
                 case 4:
