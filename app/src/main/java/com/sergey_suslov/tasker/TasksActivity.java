@@ -98,11 +98,11 @@ public class TasksActivity extends AppCompatActivity
         });
 
 //
-//        PackageManager pm = getPackageManager();
-//        pm.setComponentEnabledSetting(new ComponentName(this, com.sergey_suslov.tasker.TasksActivity.class),
-//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-//        pm.setComponentEnabledSetting(new ComponentName(this, com.sergey_suslov.tasker.IntroActivity.class),
-//                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+        PackageManager pm = getPackageManager();
+        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.TasksActivityAlias"),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.IntroActivity"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
         headerTitle = (TextView) findViewById(R.id.header_title);
         headerTitle.setText(R.string.today_tasks);

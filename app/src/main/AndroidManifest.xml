@@ -21,12 +21,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+        android:enabled="false"
+        android:exported="true"
+        android:label="Tasks"
+        android:name="TasksActivityAlias"
+        android:targetActivity=".TasksActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:screenOrientation="portrait"
             android:enabled="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:name=".IntroActivity"
-            android:label="@string/app_name"
+            android:label="@string/IntroActivityTitle"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,19 +48,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddTaskActivity" />
-
-        <activity-alias
-            android:enabled="false"
-            android:exported="true"
-            android:label="Tasks"
-            android:name="TasksActivityAlias"
-            android:targetActivity=".TasksActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.

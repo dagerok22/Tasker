@@ -10,10 +10,11 @@
     <string name="intro_matrix_description_ninu">Not important and not urgent tasks. Little things stealing your time. Do these things in the last turn, or do not do at all. </string>
     <string name="intro_third_screen_quote">Quality is not an act, it\'s a habbit</string>
     <string name="intro_start_btn_text">Start</string>
-    <string name="title_activity_tasks">TasksActivity</string>
+    <string name="title_activity_tasks">@string/app_name</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
 
     <string name="nav_header_logo">Tasker</string>
     <string name="nav_header_">Tasker</string>
@@ -32,4 +33,5 @@
     <string name="not_i_not_u_tasks_title">NOT IMPORTANT, NOT URGENT</string>
     <string name="title_activity_new_task">ADD TASK</string>
     <string name="enter_new_task_hint">Enter a new task...</string>
+    <string name="IntroActivityTitle">Hello</string>
 </resources>
