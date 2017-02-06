@@ -13,6 +13,7 @@
     tools:context="com.sergey_suslov.tasker.TasksActivity"
     tools:showIn="@layout/app_bar_tasks">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:scrollbars="none"
@@ -20,5 +21,6 @@
         android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 
 </RelativeLayout>

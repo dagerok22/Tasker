@@ -21,10 +21,15 @@
     <string name="important">Important</string>
     <string name="urgent">Urgent</string>
     <string name="not_important_not_urgent">Not important, not urgent</string>
-    <string name="filters">Filters</string>
+    <string name="date_filters">Date filters</string>
     <string name="today_tasks">Today tasks</string>
     <string name="tomorrow_tasks">Tomorrow tasks</string>
-    <string name="all_tasks">ALL TASKS</string>
+    <string name="today_tasks_title">TODAY TASKS</string>
+    <string name="tomorrow_tasks_title">TOMORROW TASKS</string>
+    <string name="all_tasks_title">ALL TASKS</string>
+    <string name="important_tasks_title">IMPORTANT TASKS</string>
+    <string name="urgent_tasks_title">URGENT TASKS</string>
+    <string name="not_i_not_u_tasks_title">NOT IMPORTANT, NOT URGENT</string>
     <string name="title_activity_new_task">ADD TASK</string>
     <string name="enter_new_task_hint">Enter a new task...</string>
 </resources>

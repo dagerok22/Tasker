@@ -20,7 +20,7 @@
             android:title="@string/not_important_not_urgent" />
     </group>
 
-    <item android:title="@string/filters">
+    <item android:title="@string/date_filters">
         <menu>
             <item
                 android:id="@+id/nav_today"

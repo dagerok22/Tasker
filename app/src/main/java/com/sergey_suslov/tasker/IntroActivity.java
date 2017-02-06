@@ -1,6 +1,7 @@
 package com.sergey_suslov.tasker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -72,6 +73,8 @@ public class IntroActivity extends AppCompatActivity {
 
 
 
+
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -119,6 +122,8 @@ public class IntroActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private FancyButton mStartBtn;
+
         public PlaceholderFragment() {
         }
 
@@ -149,6 +154,14 @@ public class IntroActivity extends AppCompatActivity {
                     break;
                 case 3:
                     rootView = inflater.inflate(R.layout.fragment_intro_third, container, false);
+                    mStartBtn = (FancyButton) rootView.findViewById(R.id.intro_start_btn);
+                    mStartBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getContext(), TasksActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     break;
                 default:
                     rootView = inflater.inflate(R.layout.fragment_intro_first, container, false);

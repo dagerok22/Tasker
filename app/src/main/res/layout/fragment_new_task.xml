@@ -40,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoComplete|textAutoCorrect|textCapSentences"
+                android:imeOptions="normal"
                 android:padding="10dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
