@@ -1,6 +1,10 @@
 package com.sergey_suslov.tasker;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,22 @@ public class MyTasksAdapter extends RecyclerView.Adapter<MyTasksAdapter.ViewHold
     private ArrayList<TaskItem> mDataset;
     private SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
     private Date todayDate = new Date();
+    private Context mContext;
+    private SQLiteDatabase readableDatabase;
+
+    public void onItemDismiss(int position) {
+        doQueryForDone(mDataset.get(position).mId);
+        mDataset.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    private void doQueryForDone(int id){
+        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(mContext);
+        readableDatabase = mDbHelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS, 1);
+        readableDatabase.update(FeedReaderContract.FeedEntry.TABLE_NAME, contentValues, FeedReaderContract.FeedEntry._ID + "=" + id, null);
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -92,7 +112,8 @@ public class MyTasksAdapter extends RecyclerView.Adapter<MyTasksAdapter.ViewHold
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyTasksAdapter(ArrayList<TaskItem> myDataset) {
+    public MyTasksAdapter(ArrayList<TaskItem> myDataset, Context ctx) {
+        mContext = ctx;
         mDataset = myDataset;
     }
 

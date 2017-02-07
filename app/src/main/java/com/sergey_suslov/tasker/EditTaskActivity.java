@@ -2,18 +2,14 @@ package com.sergey_suslov.tasker;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -21,12 +17,14 @@ import android.widget.EditText;
 
 import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AddTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity {
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
@@ -81,6 +79,49 @@ public class AddTaskActivity extends AppCompatActivity {
 
         setResult(RESULT_CANCELED);
 
+        Intent intent = getIntent();
+        String taskTitleExtra = intent.getStringExtra(TaskFieldsContract.TASK_TEXT_NAME);
+        int taskPriorityExtra = intent.getIntExtra(TaskFieldsContract.PRIORITY_NAME, 4);
+        final String taskIdExtra = intent.getStringExtra(TaskFieldsContract.ID_NAME);
+        mNewTaskEditText = (EditText) findViewById(R.id.new_task_edit_text);
+        mNewTaskEditText.setText(taskTitleExtra);
+        mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
+        mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
+        mChosenDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
+
+        mUrgentBtn = (FancyButton) findViewById(R.id.urgent_checkbox_btn);
+        mImportantBtn = (FancyButton) findViewById(R.id.important_checkbox_btn);
+
+
+        switch (taskPriorityExtra){
+            case 1:
+                mIsUrgent = true;
+                mIsImportant = true;
+                mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                break;
+            case 2:
+                mIsUrgent = false;
+                mIsImportant = true;
+                mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                break;
+            case 3:
+                mIsUrgent = true;
+                mIsImportant = false;
+                mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                break;
+            case 4:
+                mIsUrgent = false;
+                mIsImportant = false;
+                mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                break;
+        }
+
+
+
         mTodayDate = new Date();
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -107,7 +148,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // New task etid field inimation
-        mNewTaskEditText = (EditText) findViewById(R.id.new_task_edit_text);
+
 
         mNewTaskEditText.setSelected(false);
         mNewTaskEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -137,8 +178,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // Uregent and Important button dealing
-        mUrgentBtn = (FancyButton) findViewById(R.id.urgent_checkbox_btn);
-        mImportantBtn = (FancyButton) findViewById(R.id.important_checkbox_btn);
+
 
         mUrgentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,20 +206,8 @@ public class AddTaskActivity extends AppCompatActivity {
         // Dating
         final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
         wheelDayPicker.setCurved(true);
-        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                return false;
-            }
-        });
 
-        mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
-        mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
-        mChosenDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
+
         mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
 
         mTodayDateBtn.setOnClickListener(new View.OnClickListener() {
@@ -215,6 +243,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
         // Create task
         mCreateTaskBtn = (FancyButton) findViewById(R.id.finish_add_task_btn);
+        mCreateTaskBtn.setIconResource(R.drawable.ic_checked_done);
 
         mCreateTaskBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -250,10 +279,10 @@ public class AddTaskActivity extends AppCompatActivity {
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY, priority);
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, formatted);
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS, 0);
-                long newRowId = db.insert(
-                        FeedReaderContract.FeedEntry.TABLE_NAME,
-                        FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
-                        values);
+                long newRowId = db.update(FeedReaderContract.FeedEntry.TABLE_NAME,
+                        values,
+                        FeedReaderContract.FeedEntry._ID + "=" + taskIdExtra,
+                        null);
                 Log.d("mTaskDate newRowId", String.valueOf(newRowId));
                 setResult(RESULT_OK);
                 finish();

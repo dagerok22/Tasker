@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Gravity;
@@ -71,6 +72,8 @@ public class TasksActivity extends AppCompatActivity
     private static final int TOMORROW_TASKS_FILTER_STATE = 6;
     private int CURRENT_FILTER_STATE = TODAY_TASKS_FILTER_STATE;
 
+    private static final int NEW_TASK_ACTIVITY_REQUEST_CODE = 1;
+    private static final int EDIT_TASK_ACTIVITY_REQUEST_CODE = 2;
 
 
     @Override
@@ -93,21 +96,22 @@ public class TasksActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddTaskActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, NEW_TASK_ACTIVITY_REQUEST_CODE);
             }
         });
 
 //
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.TasksActivityAlias"),
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.IntroActivity"),
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+//        PackageManager pm = getPackageManager();
+//        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.TasksActivityAlias"),
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+//        pm.setComponentEnabledSetting(new ComponentName("com.sergey_suslov.tasker", "com.sergey_suslov.tasker.IntroActivity"),
+//                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
 
         headerTitle = (TextView) findViewById(R.id.header_title);
-        headerTitle.setText(R.string.today_tasks);
+        headerTitle.setText(R.string.all_tasks_title);
+        CURRENT_FILTER_STATE = ALL_TASKS_FILTER_STATE;
         // SQLite
-        mDataSet = doQueryForToday();
+        mDataSet = doQueryForAll();
         ////
 
         // Adapter things
@@ -120,9 +124,11 @@ public class TasksActivity extends AppCompatActivity
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        doQueryForDone(mDataSet.get(position));
-                        mDataSet.remove(position);
-                        mAdapter.notifyItemRemoved(position);
+                        Intent intent = new Intent(getApplicationContext(), EditTaskActivity.class);
+                        intent.putExtra(TaskFieldsContract.ID_NAME, String.valueOf(mDataSet.get(position).mId));
+                        intent.putExtra(TaskFieldsContract.PRIORITY_NAME, mDataSet.get(position).mPriority);
+                        intent.putExtra(TaskFieldsContract.TASK_TEXT_NAME, String.valueOf(mDataSet.get(position).mTitle));
+                        startActivityForResult(intent, EDIT_TASK_ACTIVITY_REQUEST_CODE);
                     }
                 })
         );
@@ -136,8 +142,13 @@ public class TasksActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new MyTasksAdapter(mDataSet);
+        mAdapter = new MyTasksAdapter(mDataSet, getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
+
+        // Swipe stuff
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
         ///////
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.setScrimColor(ContextCompat.getColor(this, R.color.colorDrawerScrim));
@@ -354,13 +365,7 @@ public class TasksActivity extends AppCompatActivity
         return DataSet;
     }
 
-    private void doQueryForDone(TaskItem item){
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS, 1);
-        readableDatabase.update(FeedReaderContract.FeedEntry.TABLE_NAME, contentValues, FeedReaderContract.FeedEntry._ID + "=" + item.mId, null);
-    }
+
 
     private void updateAdapter(){
         ArrayList<TaskItem> newDataset;
@@ -396,7 +401,8 @@ public class TasksActivity extends AppCompatActivity
         // Check which request we're responding to
             // Make sure the request was successful
         if (resultCode == RESULT_OK) {
-            updateAdapter();
+            if (requestCode == EDIT_TASK_ACTIVITY_REQUEST_CODE || requestCode == NEW_TASK_ACTIVITY_REQUEST_CODE)
+                updateAdapter();
         }
     }
 
