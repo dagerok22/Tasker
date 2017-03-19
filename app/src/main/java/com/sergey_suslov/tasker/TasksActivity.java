@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
@@ -86,10 +88,11 @@ public class TasksActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasks);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         toolbar.setElevation(0);
+
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/Roboto-RobotoRegular.ttf")
@@ -162,19 +165,32 @@ public class TasksActivity extends AppCompatActivity
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(mRecyclerView);
         ///////
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.setScrimColor(ContextCompat.getColor(this, R.color.colorDrawerScrim));
         drawer.setDrawerShadow(R.mipmap.transparent_shadow, GravityCompat.START);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+
+
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                FrameLayout containerFrame  = (FrameLayout) findViewById(R.id.activity_tasks_frame_layout);
+                containerFrame.setTranslationX(slideOffset * drawerView.getWidth());
+                drawer.bringChildToFront(drawerView);
+                drawer.requestLayout();
+                //below line used to remove shadow of drawer
+                drawer.setScrimColor(Color.TRANSPARENT);
+            }//this method helps you to aside menu drawer
+        };
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
-
 
 
         Menu m = navigationView.getMenu();
@@ -199,266 +215,266 @@ public class TasksActivity extends AppCompatActivity
     }
 
 
-    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-
-    private ArrayList<TaskItem> doQueryForAll() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    private ArrayList<TaskItem> doQueryForIU() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0 AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=1",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    //
-    private ArrayList<TaskItem> doQueryForImportant() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=2",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    private ArrayList<TaskItem> doQueryForUrgent() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=3",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    private ArrayList<TaskItem> doQueryForNotImportantNotUrgant() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=4",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    private ArrayList<TaskItem> doQueryForToday() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        String formatted = format.format(new Date());
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formatted + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
-
-    private ArrayList<TaskItem> doQueryForTomorrow() {
-        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
-        readableDatabase = mDbHelper.getReadableDatabase();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        String formatted = format.format(calendar.getTime());
-        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formatted + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
-                null,
-                null,
-                null,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
-
-        ArrayList DataSet = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                TaskItem taskItem = new TaskItem();
-                taskItem.setmId(c.getInt(0));
-                taskItem.setmTitle(c.getString(1));
-                try {
-                    taskItem.setmDateFormat(format.parse(c.getString(2)));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                taskItem.setmDate(c.getString(2));
-                if (c.getInt(3) == 0)
-                    taskItem.setmStatus(false);
-                else
-                    taskItem.setmStatus(true);
-                taskItem.setmPriority(c.getInt(4));
-                DataSet.add(taskItem);
-            } while (c.moveToNext());
-        }
-        c.close();
-        Collections.sort(DataSet);
-        return DataSet;
-    }
+//    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+//
+//    private ArrayList<TaskItem> doQueryForAll() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    private ArrayList<TaskItem> doQueryForIU() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0 AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=1",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    //
+//    private ArrayList<TaskItem> doQueryForImportant() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=2",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    private ArrayList<TaskItem> doQueryForUrgent() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=3",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    private ArrayList<TaskItem> doQueryForNotImportantNotUrgant() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=4",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    private ArrayList<TaskItem> doQueryForToday() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+//        String formatted = format.format(new Date());
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formatted + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
+//
+//    private ArrayList<TaskItem> doQueryForTomorrow() {
+//        mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+//        readableDatabase = mDbHelper.getReadableDatabase();
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DAY_OF_YEAR, 1);
+//        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+//        String formatted = format.format(calendar.getTime());
+//        Cursor c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formatted + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
+//                null,
+//                null,
+//                null,
+//                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+//
+//        ArrayList DataSet = new ArrayList<>();
+//        if (c.moveToFirst()) {
+//            do {
+//                TaskItem taskItem = new TaskItem();
+//                taskItem.setmId(c.getInt(0));
+//                taskItem.setmTitle(c.getString(1));
+//                try {
+//                    taskItem.setmDateFormat(format.parse(c.getString(2)));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                taskItem.setmDate(c.getString(2));
+//                if (c.getInt(3) == 0)
+//                    taskItem.setmStatus(false);
+//                else
+//                    taskItem.setmStatus(true);
+//                taskItem.setmPriority(c.getInt(4));
+//                DataSet.add(taskItem);
+//            } while (c.moveToNext());
+//        }
+//        c.close();
+//        Collections.sort(DataSet);
+//        return DataSet;
+//    }
 
 //
 //    public void updateCounter(){
@@ -518,6 +534,7 @@ public class TasksActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -621,6 +638,7 @@ public class TasksActivity extends AppCompatActivity
             mDbHelper = new FeedReaderDbHelper(getApplicationContext());
             readableDatabase = mDbHelper.getReadableDatabase();
             Cursor c;
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             switch (params[0])
             {
                 case ALL_TASKS_FILTER_STATE:
@@ -669,7 +687,6 @@ public class TasksActivity extends AppCompatActivity
                             FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
                     break;
                 case TODAY_TASKS_FILTER_STATE:
-                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
                     String formatted = format.format(new Date());
                     c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
                             null,
