@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#c5725a</color>
     <color name="colorPrimaryActive">#50FFFFFF</color>
     <color name="colorPrimaryPassive">#c5725a</color>
+    <color name="colorPrimaryPassive80">#80C5725A</color>
     <color name="colorPrimaryBlueDark">#3d4e5d</color>
     <color name="colorPrimaryBlueLight">#496985</color>
     <color name="colorPrimaryBlueMiddle">#475e72</color>

@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +17,8 @@ import android.widget.EditText;
 
 import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -77,9 +75,10 @@ public class AddTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_task);
         mIsUrgent = false;
         mIsImportant = false;
-        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(getApplicationContext());
 
         setResult(RESULT_CANCELED);
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         mTodayDate = new Date();
         Calendar cal = Calendar.getInstance();
@@ -88,7 +87,6 @@ public class AddTaskActivity extends AppCompatActivity {
         mTaskDate = mTodayDate;
 
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -210,7 +208,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
         ///////////
-
+        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(getApplicationContext());
         db = mDbHelper.getWritableDatabase();
 
         // Create task

@@ -3,6 +3,7 @@ package com.sergey_suslov.tasker;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 /**
  * Created by PMI51 on 07.02.2017.
@@ -27,7 +28,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         final int dragFlags = 0;
-        final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+        final int swipeFlags = ItemTouchHelper.END;
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
@@ -44,6 +45,8 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         // просто cдвигаем итем в направлении свайпа
-        viewHolder.itemView.setTranslationX(dX);
+        Log.d("SimpleItemTouch", String.valueOf(dX));
+        viewHolder.itemView.setAlpha(1 - dX * 0.0025f);
+        viewHolder.itemView.setTranslationX(dX-dX*0.35f);
     }
 }

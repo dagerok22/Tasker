@@ -5,11 +5,12 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -206,7 +207,16 @@ public class EditTaskActivity extends AppCompatActivity {
         // Dating
         final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
         wheelDayPicker.setCurved(true);
-
+        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mCurrentDateState = CHOSEN_DATE;
+                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                return false;
+            }
+        });
 
         mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
 

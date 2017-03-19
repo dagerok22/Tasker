@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +26,12 @@ public class MyTasksAdapter extends RecyclerView.Adapter<MyTasksAdapter.ViewHold
     private ArrayList<TaskItem> mDataset;
     private SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
     private Date todayDate = new Date();
-    private Context mContext;
+    public Context mContext;
     private SQLiteDatabase readableDatabase;
 
     public void onItemDismiss(int position) {
+        if(mContext instanceof ICounterUpdateMethod)
+            ((ICounterUpdateMethod) mContext).updateCounter();
         doQueryForDone(mDataset.get(position).mId);
         mDataset.remove(position);
         notifyItemRemoved(position);
