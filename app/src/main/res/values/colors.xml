@@ -1,17 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--<color name="colorPrimary">#5d606c</color>-->
+    <!--Blue-->
+    <color name="colorPrimaryBlue">#3498db</color>
+    <color name="colorPrimaryDarkBlue">#2980b9</color>
+    <color name="colorPrimaryActiveBlue">#50FFFFFF</color>
+    <color name="colorPrimaryPassiveBlue">#502980b9</color>
+    <color name="colorAccentBlue">#DA785C</color>
+    <!--Turauoise-->
+    <color name="colorPrimaryTurauoise">#1abc9c</color>
+    <color name="colorPrimaryDarkTurauoise">#16a085</color>
+    <color name="colorPrimaryActiveTurauoise">#50FFFFFF</color>
+    <color name="colorPrimaryPassiveTurauoise">#5016a085</color>
+    <color name="colorAccentTurauoise">#DA785C</color>
+    <!--Carrot-->
+    <color name="colorPrimaryCarrot">#e67e22</color>
+    <color name="colorPrimaryDarkCarrot">#d35400</color>
+    <color name="colorPrimaryActiveCarrot">#50FFFFFF</color>
+    <color name="colorPrimaryPassiveCarrot">#50d35400</color>
+    <color name="colorAccentCarrot">#DA785C</color>
+    <!--Alizarin-->
+    <!--<color name="colorPrimary">#e74c3c</color>-->
+    <!--<color name="colorPrimaryDark">#c0392b</color>-->
+    <!--<color name="colorPrimaryActive">#50FFFFFF</color>-->
+    <!--<color name="colorPrimaryPassive">#50c0392b</color>-->
+    <!--Amethist-->
+    <color name="colorPrimaryAmethist">#9b59b6</color>
+    <color name="colorPrimaryDarkAmethist">#9b59b6</color>
+    <color name="colorPrimaryActiveAmethist">#50FFFFFF</color>
+    <color name="colorPrimaryPassiveAmethist">#509b59b6</color>
+    <color name="colorAccentAmethist">#DA785C</color>
+    <!--Alizarin custom-->
+    <color name="colorPrimaryAlizarin">#E4866A</color>
+    <color name="colorPrimaryDarkAlizarin">#c5725a</color>
+    <color name="colorPrimaryActiveAlizarin">#50FFFFFF</color>
+    <color name="colorPrimaryPassiveAlizarin">#c5725a</color>
+    <color name="colorAccentAlizarin">#DA785C</color>
+
     <color name="colorPrimary">#E4866A</color>
     <color name="colorPrimaryDark">#c5725a</color>
-    <color name="colorPrimaryActive">#50FFFFFF</color>
+    <color name="colorPrimaryActive">@color/colorPrimaryActiveBlue</color>
     <color name="colorPrimaryPassive">#c5725a</color>
+    <color name="colorAccent">#DA785C</color>
+
     <color name="colorPrimaryPassive80">#80C5725A</color>
     <color name="colorPrimaryBlueDark">#3d4e5d</color>
     <color name="colorPrimaryBlueLight">#496985</color>
     <color name="colorPrimaryBlueMiddle">#475e72</color>
-    <color name="colorAccent">#DA785C</color>
     <color name="colorDrawerScrim">#90E4866A</color>
     <color name="colorTransparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="fadingGray">#999999</color>
+    <color name="colorPassive">@color/colorPrimaryPassiveBlue</color>
+    <color name="colorActive">@color/colorPrimaryActiveBlue</color>
 </resources>

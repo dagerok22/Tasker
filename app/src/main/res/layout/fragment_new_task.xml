@@ -13,7 +13,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
-    android:background="@color/colorPrimary"
+    android:background="?android:colorPrimary"
     tools:context="com.sergey_suslov.tasker.NewTaskActivityFragment"
     tools:showIn="@layout/activity_new_task">
 

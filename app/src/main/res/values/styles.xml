@@ -10,6 +10,61 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeColorAlizarin" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="colorPrimary">@color/colorPrimaryAlizarin</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkAlizarin</item>
+        <item name="colorAccent">@color/colorAccentAlizarin</item>
+        <item name="android:colorBackground">@color/colorPrimaryActiveAlizarin</item>
+        <item name="android:colorForeground">@color/colorPrimaryPassiveAlizarin</item>
+    </style>
+
+    <style name="AppThemeColorAmethist" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="colorPrimary">@color/colorPrimaryAmethist</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkAmethist</item>
+        <item name="colorAccent">@color/colorAccentAmethist</item>
+        <item name="android:colorBackground">@color/colorPrimaryPassiveAmethist</item>
+    </style>
+
+    <style name="AppThemeColorCarrot" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="colorPrimary">@color/colorPrimaryCarrot</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkCarrot</item>
+        <item name="colorAccent">@color/colorAccentCarrot</item>
+        <item name="android:colorBackground">@color/colorPrimaryActiveCarrot</item>
+        <item name="android:colorForeground">@color/colorPrimaryPassiveCarrot</item>
+    </style>
+
+    <style name="AppThemeColorTurauoise" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="colorPrimary">@color/colorPrimaryTurauoise</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkTurauoise</item>
+        <item name="colorAccent">@color/colorAccentTurauoise</item>
+        <item name="android:colorBackground">@color/colorPrimaryActiveTurauoise</item>
+        <item name="android:colorForeground">@color/colorPrimaryPassiveTurauoise</item>
+    </style>
+
+    <style name="AppThemeColorBlue" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation">0dp</item>
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
+        <item name="colorAccent">@color/colorAccentBlue</item>
+        <item name="android:colorBackground">@color/colorPrimaryActiveBlue</item>
+        <item name="android:colorForeground">@color/colorPrimaryPassiveBlue</item>
+    </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

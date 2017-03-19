@@ -46,7 +46,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         // просто cдвигаем итем в направлении свайпа
         Log.d("SimpleItemTouch", String.valueOf(dX));
-        viewHolder.itemView.setAlpha(1 - dX * 0.0025f);
+        viewHolder.itemView.setAlpha(1 - dX/c.getWidth());
         viewHolder.itemView.setTranslationX(dX-dX*0.35f);
     }
 }

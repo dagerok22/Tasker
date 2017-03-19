@@ -2,9 +2,10 @@ package com.sergey_suslov.tasker;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,9 +46,9 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private EditText mNewTaskEditText;
 
-    private String mActiveColor = "#50FFFFFF";
+    private Integer mActiveColor;
     //    private String mActiveColor = "#80C5725A";
-    private String mPassiveColor = "#80C5725A";
+    private Integer mPassiveColor;
 
     private Boolean mIsUrgent;
     private Boolean mIsImportant;
@@ -71,6 +72,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppThemeColorBlue);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         mIsUrgent = false;
@@ -79,6 +81,10 @@ public class AddTaskActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        Intent intent = getIntent();
+        mActiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryActive);
+        mPassiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryPassive);
 
         mTodayDate = new Date();
         Calendar cal = Calendar.getInstance();
@@ -136,16 +142,18 @@ public class AddTaskActivity extends AppCompatActivity {
 
         // Uregent and Important button dealing
         mUrgentBtn = (FancyButton) findViewById(R.id.urgent_checkbox_btn);
+        mUrgentBtn.setBackgroundColor(mPassiveColor);
         mImportantBtn = (FancyButton) findViewById(R.id.important_checkbox_btn);
+        mImportantBtn.setBackgroundColor(mPassiveColor);
 
         mUrgentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mIsUrgent = !mIsUrgent;
                 if (mIsUrgent)
-                    mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                    mUrgentBtn.setBackgroundColor(mActiveColor);
                 else
-                    mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                    mUrgentBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mImportantBtn.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +161,9 @@ public class AddTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mIsImportant = !mIsImportant;
                 if (mIsImportant)
-                    mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                    mImportantBtn.setBackgroundColor(mActiveColor);
                 else
-                    mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                    mImportantBtn.setBackgroundColor(mPassiveColor);
             }
         });
         ////////////
@@ -168,9 +176,9 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+                mChosenDateBtn.setBackgroundColor(mActiveColor);
                 return false;
             }
         });
@@ -178,33 +186,35 @@ public class AddTaskActivity extends AppCompatActivity {
         mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
         mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
         mChosenDateBtn = (FancyButton) findViewById(R.id.another_date_btn);
-        mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+        mTodayDateBtn.setBackgroundColor(mActiveColor);
+        mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+        mChosenDateBtn.setBackgroundColor(mPassiveColor);
 
         mTodayDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TODAY_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTodayDateBtn.setBackgroundColor(mActiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+                mChosenDateBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mTomorrowDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TOMORROW_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mActiveColor);
+                mChosenDateBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mChosenDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+                mChosenDateBtn.setBackgroundColor(mActiveColor);
             }
         });
         ///////////
