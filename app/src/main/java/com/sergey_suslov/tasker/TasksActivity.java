@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -77,6 +78,8 @@ public class TasksActivity extends AppCompatActivity
 
     private static final int NEW_TASK_ACTIVITY_REQUEST_CODE = 1;
     private static final int EDIT_TASK_ACTIVITY_REQUEST_CODE = 2;
+
+
 
 
     @Override
@@ -462,34 +465,34 @@ public class TasksActivity extends AppCompatActivity
 
     private void updateAdapter() {
         ArrayList<TaskItem> newDataset;
-        switch (CURRENT_FILTER_STATE) {
-            case ALL_TASKS_FILTER_STATE:
-                newDataset = doQueryForAll();
-                break;
-            case IU_TASKS_FILTER_STATE:
-                newDataset = doQueryForIU();
-                break;
-            case IMPORTANT_TASKS_FILTER_STATE:
-                newDataset = doQueryForImportant();
-                break;
-            case URGENT_TASKS_FILTER_STATE:
-                newDataset = doQueryForUrgent();
-                break;
-            case NUNI_TASKS_FILTER_STATE:
-                newDataset = doQueryForNotImportantNotUrgant();
-                break;
-            case TODAY_TASKS_FILTER_STATE:
-                newDataset = doQueryForToday();
-                break;
-            case TOMORROW_TASKS_FILTER_STATE:
-                newDataset = doQueryForTomorrow();
-                break;
-            default:
-                newDataset = doQueryForAll();
-                break;
-        }
-        mDataSet = newDataset;
-        mAdapter.setNewDate(mDataSet);
+//        switch (CURRENT_FILTER_STATE) {
+//            case ALL_TASKS_FILTER_STATE:
+//                newDataset = doQueryForAll();
+//                break;
+//            case IU_TASKS_FILTER_STATE:
+//                newDataset = doQueryForIU();
+//                break;
+//            case IMPORTANT_TASKS_FILTER_STATE:
+//                newDataset = doQueryForImportant();
+//                break;
+//            case URGENT_TASKS_FILTER_STATE:
+//                newDataset = doQueryForUrgent();
+//                break;
+//            case NUNI_TASKS_FILTER_STATE:
+//                newDataset = doQueryForNotImportantNotUrgant();
+//                break;
+//            case TODAY_TASKS_FILTER_STATE:
+//                newDataset = doQueryForToday();
+//                break;
+//            case TOMORROW_TASKS_FILTER_STATE:
+//                newDataset = doQueryForTomorrow();
+//                break;
+//            default:
+//                newDataset = doQueryForAll();
+//                break;
+//        }
+        QueryForTasks queryForTasks = new QueryForTasks();
+        queryForTasks.execute(CURRENT_FILTER_STATE);
     }
 
     @Override
@@ -607,4 +610,127 @@ public class TasksActivity extends AppCompatActivity
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
+
+    public class QueryForTasks extends AsyncTask<Integer, Integer, ArrayList<TaskItem>> {
+
+        @Override
+        protected ArrayList<TaskItem> doInBackground(Integer... params) {
+            mDbHelper = new FeedReaderDbHelper(getApplicationContext());
+            readableDatabase = mDbHelper.getReadableDatabase();
+            Cursor c;
+            switch (params[0])
+            {
+                case ALL_TASKS_FILTER_STATE:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+                    break;
+                case IU_TASKS_FILTER_STATE:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0 AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=1",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+                    break;
+                case IMPORTANT_TASKS_FILTER_STATE:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=2",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+                    break;
+                case URGENT_TASKS_FILTER_STATE:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=3",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+                    break;
+                case NUNI_TASKS_FILTER_STATE:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0" + " AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY + "=4",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE);
+                    break;
+                case TODAY_TASKS_FILTER_STATE:
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                    String formatted = format.format(new Date());
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formatted + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+                    break;
+                case TOMORROW_TASKS_FILTER_STATE:
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                    String formattedDate = dateFormat.format(calendar.getTime());
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " = '" + formattedDate + "' AND " + FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + "=0",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+                    break;
+                default:
+                    c = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_STATUS + " = 0",
+                            null,
+                            null,
+                            null,
+                            FeedReaderContract.FeedEntry.COLUMN_NAME_DATE + " , " + FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY);
+                    break;
+            }
+
+            ArrayList DataSet = new ArrayList<>();
+            if (c.moveToFirst()) {
+                do {
+                    TaskItem taskItem = new TaskItem();
+                    taskItem.setmId(c.getInt(0));
+                    taskItem.setmTitle(c.getString(1));
+                    try {
+                        taskItem.setmDateFormat(format.parse(c.getString(2)));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    taskItem.setmDate(c.getString(2));
+                    if (c.getInt(3) == 0)
+                        taskItem.setmStatus(false);
+                    else
+                        taskItem.setmStatus(true);
+                    taskItem.setmPriority(c.getInt(4));
+                    DataSet.add(taskItem);
+                } while (c.moveToNext());
+            }
+            c.close();
+            Collections.sort(DataSet);
+            return DataSet;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<TaskItem> taskItems) {
+            super.onPostExecute(taskItems);
+            mDataSet = taskItems;
+            mAdapter.setNewDate(mDataSet);
+        }
+    }
+
 }
