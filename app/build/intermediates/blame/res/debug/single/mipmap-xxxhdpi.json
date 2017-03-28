@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/mountain_fog.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xxxhdpi/mountain_fog.png"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/transparent_shadow.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xxxhdpi/transparent_shadow.png"
+    }
+]

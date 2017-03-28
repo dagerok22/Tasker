@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.sergey_suslov.tasker.IntroActivity$PlaceholderFragment"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:text="@string/intro_third_screen_quote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/IntroThirdScreenQuote"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:id="@+id/intro_quote_textview"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_intro_good_luck"
+        android:id="@+id/intro_good_luck_ic"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        style="@style/CustomSizeText"
+        android:id="@+id/intro_start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="8dp"
+        fancy:fb_textGravity="center"
+        fancy:fb_radius="20dp"
+        fancy:fb_textSize="50dp"
+        fancy:fb_textColor="@color/white"
+        fancy:fb_borderColor="@color/white"
+        fancy:fb_borderWidth="1.5dp"
+        fancy:fb_defaultColor="@color/colorPrimaryDark"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_fontIconResource="&#xf105;"
+        fancy:fb_fontIconSize="25dp"
+        fancy:fb_text=""
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

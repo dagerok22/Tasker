@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-xhdpi/mountain_fog_long.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable-xhdpi/mountain_fog_long.png"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-xhdpi/mountain_fog.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable-xhdpi/mountain_fog.png"
+    }
+]

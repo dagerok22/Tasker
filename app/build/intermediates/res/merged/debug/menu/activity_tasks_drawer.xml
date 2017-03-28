@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_top_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_list"
+            android:title="@string/all_tasks" />
+        <item
+            android:id="@+id/nav_iu"
+            android:icon="@drawable/ic_danger"
+            android:title="@string/important_amp_urgent" />
+        <item
+            android:id="@+id/nav_i"
+            android:icon="@drawable/ic_fire"
+            android:title="@string/important" />
+        <item
+            android:id="@+id/nav_u"
+            android:icon="@drawable/ic_urgent_timer"
+            android:title="@string/urgent" />
+        <item
+            android:id="@+id/nav_ninu"
+            android:icon="@drawable/ic_circle_intro_nuni"
+            android:title="@string/not_important_not_urgent" />
+        <item
+            android:id="@+id/nav_today"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/today_tasks" />
+        <item
+            android:id="@+id/nav_tomorrow"
+            android:icon="@drawable/ic_next"
+            android:title="@string/tomorrow_tasks" />
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom_group"
+        android:checkableBehavior="none">
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" />
+    </group>
+
+</menu>

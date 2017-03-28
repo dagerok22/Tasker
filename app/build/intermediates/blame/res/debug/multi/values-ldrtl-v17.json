@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldrtl-v17/values-ldrtl-v17.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 35,
+                    "endOffset": 86
+                },
+                "from": {
+                    "file": "/home/sergey/.android/build-cache/c6ae76b4cdf4f69efe525bf2a39b74da81446854/output/res/values-ldrtl-v17/values-ldrtl-v17.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 35,
+                        "endOffset": 86
+                    }
+                }
+            }
+        ]
+    }
+]

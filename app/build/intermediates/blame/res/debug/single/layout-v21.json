@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout-v21/bottom_sheet_picker_bottom_sheet.xml",
+        "source": "/home/sergey/.android/build-cache/72f8e575e4d9254caffdafabc887d0fdeb36f590/output/res/layout-v21/bottom_sheet_picker_bottom_sheet.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout-v21/notification_template_icon_group.xml"
+    }
+]

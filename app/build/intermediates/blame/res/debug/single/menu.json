@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/menu/menu_intro.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/menu/menu_intro.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/menu/activity_tasks_drawer.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/menu/activity_tasks_drawer.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/menu/tasks.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/menu/tasks.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/menu/menu_new_task.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/menu/menu_new_task.xml"
+    }
+]
