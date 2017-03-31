@@ -32,12 +32,12 @@
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/layout/activity_edit_task.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
-        "source": "/home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/res/layout/design_layout_tab_text.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/design_layout_tab_text.xml",
+        "source": "/home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/res/layout/design_layout_tab_text.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
