@@ -260,6 +260,10 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/drawable/abc_ic_ab_back_material.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable/ic_list_bitmap.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable/ic_list_bitmap.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable/abc_ic_clear_material.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/drawable/abc_ic_clear_material.xml"
     },

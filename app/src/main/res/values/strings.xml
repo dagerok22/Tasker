@@ -39,7 +39,8 @@
     <string name="for_today">Today:</string>
 
     <string name="no_tasks_notification_text">I have ot no tasks yet</string>
-    
+    <string name="notification_ticket">Briefing time</string>
+
     <string name="preference_file_key">tasker_preference_file</string>
     <string name="preference_saved_briefing_time">preference_saved_briefing_time</string>
     <string name="preference_saved_briefing_time_default">1127</string>

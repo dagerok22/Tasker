@@ -1,4 +1,4 @@
-#Fri Mar 31 18:02:25 NOVT 2017
+#Fri Mar 31 21:21:49 NOVT 2017
 file.9=/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6fc4865a3fe6f3a8312d3d0c2273ae89d043ad95/classes.dex
 base.10=/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6789e296b6726650c4de31fb7fe67e4bc49ec049
 file.8=/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8a5d2933a777f978c49b2d00170edaa6085b9452/classes.dex

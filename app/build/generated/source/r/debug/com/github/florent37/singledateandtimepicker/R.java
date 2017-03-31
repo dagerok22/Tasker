@@ -534,7 +534,7 @@ public final class R {
         public static final int abc_textfield_search_material = 0x7f020051;
         public static final int double_date_picker_button_background_selector = 0x7f020071;
         public static final int double_date_picker_button_background_selector_ios = 0x7f020072;
-        public static final int notification_template_icon_bg = 0x7f0200a5;
+        public static final int notification_template_icon_bg = 0x7f0200a6;
     }
     public static final class id {
         public static final int action0 = 0x7f0d00e5;

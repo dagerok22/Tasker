@@ -8,8 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
-import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -21,9 +22,12 @@ import java.util.Locale;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import static android.support.v4.app.NotificationCompat.DEFAULT_ALL;
+
 
 public class BriefingService extends Service {
 
+    private Bitmap mLargeIcon;
     private Calendar mCalendar;
     private NotificationCompat.Builder mBuilder;
     private NotificationManager mNotificationManager;
@@ -45,6 +49,7 @@ public class BriefingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("Brief", "onStartCommand");
+        mLargeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_list);
         mId = 1;
         mSharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         startLoop();
@@ -112,22 +117,23 @@ public class BriefingService extends Service {
                 null);
         int numberOfToday = c.getCount();
 
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        long[] pattern = {0, 400, 200, 400};
-        vibrator.vibrate(pattern, -1);
-
         String mainNotifText = "Good day!";
         String subNotifText = "I'va got no tasks, yet";
         if (numberOfAll != 0 || numberOfToday != 0){
-            subNotifText = "Today: " + numberOfToday + " All: " + numberOfAll;
+            subNotifText = "Today: " + numberOfToday + "  All: " + numberOfAll;
         }
 
+        long[] pattern = {0, 400, 200, 400};
         mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_clipboard)
+                        .setSmallIcon(R.drawable.ic_checked_done)
                         .setContentTitle(mainNotifText)
                         .setContentText(subNotifText)
-                        .setAutoCancel(true);
+                        .setAutoCancel(true)
+                        .setVibrate(pattern)
+                        .setDefaults(DEFAULT_ALL)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_list_notif))
+                        .setTicker(getString(R.string.notification_ticket));
         Intent resultIntent = new Intent(this, TasksActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);

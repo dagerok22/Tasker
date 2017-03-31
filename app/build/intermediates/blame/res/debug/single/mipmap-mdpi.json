@@ -8,6 +8,10 @@
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_list_notif.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-mdpi/ic_list_notif.png"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_mountain_fog_img.png",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-mdpi/ic_mountain_fog_img.png"
     }
