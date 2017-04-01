@@ -27,6 +27,7 @@
             android:paddingStart="0dp"
             android:paddingTop="7dp"
             fancy:fb_borderWidth="0dp"
+            fancy:fb_iconResource="@drawable/ic_002_left_arrow"
             fancy:fb_defaultColor="?android:colorPrimary"
             fancy:fb_fontIconSize="30dp"
             fancy:fb_iconResource="@drawable/ic_002_left_arrow"
