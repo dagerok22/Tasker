@@ -799,9 +799,13 @@
     <string name="nav_header_logo">Tasker</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="no_tasks_notification_text">I have ot no tasks yet</string>
+    <string name="no_tasks_notification_text">I have no tasks yet</string>
     <string name="not_i_not_u_tasks_title">NOT IMPORTANT, NOT URGENT</string>
     <string name="not_important_not_urgent">Not important, not urgent</string>
+    <string name="notification_action">notif_action</string>
+    <string name="notification_compressed_title_text">Hello, briefing time!</string>
+    <string name="notification_expanded_title_text">Tasks:</string>
+    <string name="notification_main_text">Good day!</string>
     <string name="notification_ticket">Briefing time</string>
     <string name="password_toggle_content_description">Toggle password visibility</string>
     <string name="path_password_eye">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
@@ -813,7 +817,7 @@
     <string name="picker_today">today</string>
     <string name="preference_file_key">tasker_preference_file</string>
     <string name="preference_saved_briefing_time">preference_saved_briefing_time</string>
-    <string name="preference_saved_briefing_time_default">1127</string>
+    <string name="preference_saved_briefing_time_default">540</string>
     <string name="search_menu_title">Search</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="settings">Settings</string>

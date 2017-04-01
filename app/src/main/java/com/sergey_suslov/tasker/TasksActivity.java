@@ -735,19 +735,19 @@ public class TasksActivity extends AppCompatActivity
             if (c.moveToFirst()) {
                 do {
                     TaskItem taskItem = new TaskItem();
-                    taskItem.setmId(c.getInt(0));
-                    taskItem.setmTitle(c.getString(1));
+                    taskItem.setmId(c.getInt(FeedReaderContract.FeedEntry.COLUMN_NUMBER_ID));
+                    taskItem.setmTitle(c.getString(FeedReaderContract.FeedEntry.COLUMN_NUMBER_TITLE));
                     try {
-                        taskItem.setmDateFormat(format.parse(c.getString(2)));
+                        taskItem.setmDateFormat(format.parse(c.getString(FeedReaderContract.FeedEntry.COLUMN_NUMBER_DATE)));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    taskItem.setmDate(c.getString(2));
-                    if (c.getInt(3) == 0)
+                    taskItem.setmDate(c.getString(FeedReaderContract.FeedEntry.COLUMN_NUMBER_DATE));
+                    if (c.getInt(FeedReaderContract.FeedEntry.COLUMN_NUMBER_STATUS) == 0)
                         taskItem.setmStatus(false);
                     else
                         taskItem.setmStatus(true);
-                    taskItem.setmPriority(c.getInt(4));
+                    taskItem.setmPriority(c.getInt(FeedReaderContract.FeedEntry.COLUMN_NUMBER_PRIORITY));
                     DataSet.add(taskItem);
                 } while (c.moveToNext());
             }
