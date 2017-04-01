@@ -4,6 +4,8 @@
 <img src="https://pp.userapi.com/c837634/v837634673/31672/GqzA8A9-OPo.jpg" width="50%">
 </p>
 <h1>License</h1>
+<pre>
+<code>
 Copyright 2017 Suslov Sergey
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,3 +19,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+</code>
+</pre>
