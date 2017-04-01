@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class EditTaskActivity extends AppCompatActivity
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
-    private FancyButton mCreateTaskBtn;
+    private FloatingActionButton mCreateTaskBtn;
 
     private static final int TODAY_DATE = 0;
     private static final int TOMORROW_DATE = 1;
@@ -244,10 +245,6 @@ public class EditTaskActivity extends AppCompatActivity
         mChosenDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(mPassiveColor);
-                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
-                mChosenDateBtn.setBackgroundColor(mActiveColor);
                 CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
                         .setOnDateSetListener(EditTaskActivity.this)
                         .setThemeCustom(R.style.CustomDateTimePickerThemeStyle);
@@ -259,8 +256,7 @@ public class EditTaskActivity extends AppCompatActivity
 
         db = mDbHelper.getWritableDatabase();
         // Create task
-        mCreateTaskBtn = (FancyButton) findViewById(R.id.finish_add_task_btn);
-        mCreateTaskBtn.setIconResource(R.drawable.ic_checked_done);
+        mCreateTaskBtn = (FloatingActionButton) findViewById(R.id.finish_add_task_floating_btn);
 
         mCreateTaskBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -314,6 +310,10 @@ public class EditTaskActivity extends AppCompatActivity
     @Override
     public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
         mTaskDate.set(year, monthOfYear, dayOfMonth);
+        mCurrentDateState = CHOSEN_DATE;
+        mTodayDateBtn.setBackgroundColor(mPassiveColor);
+        mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+        mChosenDateBtn.setBackgroundColor(mActiveColor);
     }
 
     @Override
