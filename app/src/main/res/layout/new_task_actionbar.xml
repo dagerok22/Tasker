@@ -28,8 +28,8 @@
             fancy:fb_textSize="50dp"
             fancy:fb_textColor="@color/colorPrimaryDark"
             fancy:fb_borderWidth="0dp"
+            fancy:fb_iconResource="@drawable/ic_002_left_arrow"
             fancy:fb_defaultColor="?android:colorPrimary"
-            fancy:fb_fontIconResource="&#xf104;"
             fancy:fb_fontIconSize="30dp"
             fancy:fb_text="" />
 

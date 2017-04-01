@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,7 @@ public class AddTaskActivity extends AppCompatActivity
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
-    private FancyButton mCreateTaskBtn;
+    private FloatingActionButton mCreateTaskBtn;
 
     private static final int TODAY_DATE = 0;
     private static final int TOMORROW_DATE = 1;
@@ -230,7 +231,7 @@ public class AddTaskActivity extends AppCompatActivity
         db = mDbHelper.getWritableDatabase();
 
         // Create task
-        mCreateTaskBtn = (FancyButton) findViewById(R.id.finish_add_task_btn);
+        mCreateTaskBtn = (FloatingActionButton) findViewById(R.id.finish_add_task_floating_btn);
 
         mCreateTaskBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

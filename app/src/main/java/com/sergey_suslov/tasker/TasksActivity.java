@@ -2,7 +2,6 @@ package com.sergey_suslov.tasker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -98,11 +97,11 @@ public class TasksActivity extends AppCompatActivity
         getSupportActionBar().setTitle("");
         toolbar.setElevation(0);
 
-        SharedPreferences mSharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putInt(getString(R.string.briefing_last_time_shown_date),
-                89);
-        editor.commit();
+//        SharedPreferences mSharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = mSharedPreferences.edit();
+//        editor.putInt(getString(R.string.briefing_last_time_shown_date),
+//                89);
+//        editor.commit();
 
         startService(new Intent(getApplicationContext(), BriefingService.class));
 
