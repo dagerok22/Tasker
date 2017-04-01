@@ -135,4 +135,22 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/fadingGray</item>
     </style>
+    
+    <style name="CustomDateTimePickerThemeStyle" parent="BetterPickersRadialTimePickerDialog.PrimaryColor">
+        <item name="bpPreHeaderBackgroundColor">@color/colorPrimary</item>
+        <item name="bpHeaderBackgroundColor">@color/colorPrimary</item>
+        <item name="bpHeaderSelectedTextColor">@color/white</item>
+        <item name="bpHeaderUnselectedTextColor">@color/white</item>
+
+        <item name="bpBodyBackgroundColor">@color/colorPrimary</item>
+        <item name="bpBodySelectedTextColor">@color/colorPrimaryDark</item>
+        <item name="bpBodyUnselectedTextColor">@android:color/white</item>
+
+        <item name="bpRadialBackgroundColor">@color/colorPrimary</item>
+        <item name="bpRadialTextColor">@color/colorPrimary</item>
+        <item name="bpRadialPointerColor">@android:color/black</item>
+
+        <item name="bpButtonsBackgroundColor">@color/colorPrimary</item>
+        <item name="bpButtonsTextColor">@color/white</item>
+    </style>
 </resources>

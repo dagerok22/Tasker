@@ -26,7 +26,7 @@
             android:paddingTop="5dp"
             fancy:fb_textGravity="center"
             fancy:fb_textSize="50dp"
-            fancy:fb_textColor="@color/white"
+            fancy:fb_textColor="@color/colorPrimaryDark"
             fancy:fb_borderWidth="0dp"
             fancy:fb_defaultColor="?android:colorPrimary"
             fancy:fb_fontIconResource="&#xf104;"
