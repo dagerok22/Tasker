@@ -12,6 +12,10 @@
         "source": "/home/sergey/.android/build-cache/72f8e575e4d9254caffdafabc887d0fdeb36f590/output/res/color/double_date_picker_button_text_selector.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/recurrence_spinner_text_color.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/recurrence_spinner_text_color.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
         "source": "/home/sergey/.android/build-cache/03a5e983758fa399920d64c58b7d09224728fe81/output/res/color/common_google_signin_btn_text_dark.xml"
     },
@@ -32,6 +36,10 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/date_picker_year_selector.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/date_picker_year_selector.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_tint_switch_track.xml"
     },
@@ -44,6 +52,10 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_secondary_text_material_dark.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/date_picker_selector.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/date_picker_selector.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_dark.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_hint_foreground_material_dark.xml"
     },
@@ -54,6 +66,10 @@
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_btn_colored_borderless_text_material.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/dialog_text_color_holo_light.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/dialog_text_color_holo_light.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_light.xml",
@@ -76,6 +92,10 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/switch_thumb_material_light.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/dialog_text_color_holo_dark.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/dialog_text_color_holo_dark.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_primary_text_material_light.xml"
     },
@@ -92,8 +112,20 @@
         "source": "/home/sergey/.android/build-cache/72f8e575e4d9254caffdafabc887d0fdeb36f590/output/res/color/date_picker_am_pm_text_selector.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/done_text_color_dark.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/done_text_color_dark.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/done_text_color.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/done_text_color.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/recurrence_bubble_text_color.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/recurrence_bubble_text_color.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_btn_colored_text_material.xml",

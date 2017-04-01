@@ -4,19 +4,18 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +24,8 @@ import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class EditTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity
+        implements CalendarDatePickerDialogFragment.OnDateSetListener{
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
@@ -36,26 +36,23 @@ public class EditTaskActivity extends AppCompatActivity {
     private static final int CHOSEN_DATE = 2;
     private int mCurrentDateState = TODAY_DATE;
 
-    private Date mTaskDate;
-    private Date mTodayDate;
-    private Date mTomorrowDate;
-    private Date mChosenDate;
+    private Calendar mTaskDate;
     private FancyButton mTodayDateBtn;
     private FancyButton mTomorrowDateBtn;
     private FancyButton mChosenDateBtn;
 
     private EditText mNewTaskEditText;
 
-    private String mActiveColor = "#50FFFFFF";
+    private Integer mActiveColor;
     //    private String mActiveColor = "#80C5725A";
-    private String mPassiveColor = "#80C5725A";
+    private Integer mPassiveColor;
 
     private Boolean mIsUrgent;
     private Boolean mIsImportant;
 
     private SQLiteDatabase db;
 
-
+    private static final String FRAG_TAG_DATE_PICKER = "fragment_date_picker";
 
 
     public void hideKeyboard(View view) {
@@ -81,6 +78,9 @@ public class EditTaskActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
 
         Intent intent = getIntent();
+        mActiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryActive);
+        mPassiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryPassive);
+
         String taskTitleExtra = intent.getStringExtra(TaskFieldsContract.TASK_TEXT_NAME);
         int taskPriorityExtra = intent.getIntExtra(TaskFieldsContract.PRIORITY_NAME, 4);
         final String taskIdExtra = intent.getStringExtra(TaskFieldsContract.ID_NAME);
@@ -98,37 +98,37 @@ public class EditTaskActivity extends AppCompatActivity {
             case 1:
                 mIsUrgent = true;
                 mIsImportant = true;
-                mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mUrgentBtn.setBackgroundColor(mActiveColor);
+                mImportantBtn.setBackgroundColor(mActiveColor);
                 break;
             case 2:
                 mIsUrgent = false;
                 mIsImportant = true;
-                mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mUrgentBtn.setBackgroundColor(mPassiveColor);
+                mImportantBtn.setBackgroundColor(mActiveColor);
                 break;
             case 3:
                 mIsUrgent = true;
                 mIsImportant = false;
-                mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mUrgentBtn.setBackgroundColor(mActiveColor);
+                mImportantBtn.setBackgroundColor(mPassiveColor);
                 break;
             case 4:
                 mIsUrgent = false;
                 mIsImportant = false;
-                mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mUrgentBtn.setBackgroundColor(mPassiveColor);
+                mImportantBtn.setBackgroundColor(mPassiveColor);
                 break;
         }
 
 
 
-        mTodayDate = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        mTomorrowDate = cal.getTime();
-        mTaskDate = mTodayDate;
-
+//        mTodayDate = new Date();
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.DAY_OF_MONTH, 1);
+//        mTomorrowDate = cal.getTime();
+//        mTaskDate = mTodayDate;
+        mTaskDate = Calendar.getInstance();
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -186,9 +186,9 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mIsUrgent = !mIsUrgent;
                 if (mIsUrgent)
-                    mUrgentBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                    mUrgentBtn.setBackgroundColor(mActiveColor);
                 else
-                    mUrgentBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                    mUrgentBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mImportantBtn.setOnClickListener(new View.OnClickListener() {
@@ -196,61 +196,68 @@ public class EditTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mIsImportant = !mIsImportant;
                 if (mIsImportant)
-                    mImportantBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                    mImportantBtn.setBackgroundColor(mActiveColor);
                 else
-                    mImportantBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                    mImportantBtn.setBackgroundColor(mPassiveColor);
             }
         });
         ////////////
 
 
         // Dating
-        final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
-        wheelDayPicker.setCurved(true);
-        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                return false;
-            }
-        });
+//        final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
+//        wheelDayPicker.setCurved(true);
+//        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                mCurrentDateState = CHOSEN_DATE;
+//                mTodayDateBtn.setBackgroundColor(mPassiveColor));
+//                mTomorrowDateBtn.setBackgroundColor(mPassiveColor));
+//                mChosenDateBtn.setBackgroundColor(mActiveColor));
+//                return false;
+//            }
+//        });
 
-        mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+        mTodayDateBtn.setBackgroundColor(mActiveColor);
 
         mTodayDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TODAY_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTaskDate = Calendar.getInstance();
+                mTodayDateBtn.setBackgroundColor(mActiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+                mChosenDateBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mTomorrowDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TOMORROW_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
+                mTaskDate = Calendar.getInstance();
+                mTaskDate.add(Calendar.DAY_OF_YEAR, 1);
+                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mActiveColor);
+                mChosenDateBtn.setBackgroundColor(mPassiveColor);
             }
         });
         mChosenDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mTomorrowDateBtn.setBackgroundColor(Color.parseColor(mPassiveColor));
-                mChosenDateBtn.setBackgroundColor(Color.parseColor(mActiveColor));
+                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+                mChosenDateBtn.setBackgroundColor(mActiveColor);
+                CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
+                        .setOnDateSetListener(EditTaskActivity.this)
+                        .setThemeCustom(R.style.CustomDateTimePickerThemeStyle);
+                cdp.show(getSupportFragmentManager(), FRAG_TAG_DATE_PICKER);
+
             }
         });
         ///////////
 
         db = mDbHelper.getWritableDatabase();
-
         // Create task
         mCreateTaskBtn = (FancyButton) findViewById(R.id.finish_add_task_btn);
         mCreateTaskBtn.setIconResource(R.drawable.ic_checked_done);
@@ -266,23 +273,23 @@ public class EditTaskActivity extends AppCompatActivity {
                 else if (mIsImportant)
                     priority = 2;
 
-                switch (mCurrentDateState) {
-                    case TODAY_DATE:
-                        mTaskDate = mTodayDate;
-                        break;
-                    case TOMORROW_DATE:
-                        mTaskDate = mTomorrowDate;
-                        break;
-                    case CHOSEN_DATE:
-                        mTaskDate = wheelDayPicker.getCurrentDate();
-                        break;
-                    default:
-                        mTaskDate = mTodayDate;
-                        break;
-                }
+//                switch (mCurrentDateState) {
+//                    case TODAY_DATE:
+//                        mTaskDate = mTodayDate;
+//                        break;
+//                    case TOMORROW_DATE:
+//                        mTaskDate = mTomorrowDate;
+//                        break;
+//                    case CHOSEN_DATE:
+//                        mTaskDate = wheelDayPicker.getCurrentDate();
+//                        break;
+//                    default:
+//                        mTaskDate = mTodayDate;
+//                        break;
+//                }
 
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                String formatted = format.format(mTaskDate);
+                String formatted = format.format(mTaskDate.getTime());
 
                 ContentValues values = new ContentValues();
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
@@ -294,6 +301,8 @@ public class EditTaskActivity extends AppCompatActivity {
                         FeedReaderContract.FeedEntry._ID + "=" + taskIdExtra,
                         null);
                 Log.d("mTaskDate newRowId", String.valueOf(newRowId));
+                if(db.isOpen())
+                    db.close();
                 setResult(RESULT_OK);
                 finish();
             }
@@ -303,7 +312,14 @@ public class EditTaskActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+        mTaskDate.set(year, monthOfYear, dayOfMonth);
+    }
+
+    @Override
     public void onBackPressed() {
+        if(db.isOpen())
+            db.close();
         setResult(RESULT_CANCELED);
         finish();
 //        super.onBackPressed();

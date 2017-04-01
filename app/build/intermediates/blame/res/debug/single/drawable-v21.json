@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/mdtp_material_button_selected.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/mdtp_material_button_selected.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_send.xml",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable-v21/ic_menu_send.xml"
     },
@@ -24,6 +28,10 @@
         "source": "/home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/res/drawable-v21/design_password_eye.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/bp_material_button_background.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/bp_material_button_background.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/drawable-v21/notification_action_background.xml"
     },
@@ -36,12 +44,20 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
     },
     {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/key_background_dark.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/key_background_dark.xml"
+    },
+    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_camera.xml",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable-v21/ic_menu_camera.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/key_background_light.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/key_background_light.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_share.xml",
@@ -54,5 +70,13 @@
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_gallery.xml",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/drawable-v21/ic_menu_gallery.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/button_background_light.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/button_background_light.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/drawable-v21/button_background_dark.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/drawable-v21/button_background_dark.xml"
     }
 ]

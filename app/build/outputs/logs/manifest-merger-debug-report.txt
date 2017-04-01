@@ -139,6 +139,7 @@ ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifes
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:69:13-44
 uses-sdk
 INJECTED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.code-troopers.betterpickers:library:3.1.0] /home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/AndroidManifest.xml:8:5-10:41
 MERGED from [com.android.support:design:25.1.0] /home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/AndroidManifest.xml:21:5-23:62
 MERGED from [com.android.support:transition:25.1.0] /home/sergey/.android/build-cache/4d587fded12930f191dd4422cb3ef8bfe5d4417d/output/AndroidManifest.xml:20:5-44
 MERGED from [uk.co.chrisjenx:calligraphy:2.2.0] /home/sergey/.android/build-cache/31bb5a2fbe86df6242837655ae780fb8a3991742/output/AndroidManifest.xml:7:5-9:41

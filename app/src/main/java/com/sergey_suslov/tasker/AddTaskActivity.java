@@ -10,13 +10,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.github.florent37.singledateandtimepicker.widget.WheelDayPicker;
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +24,8 @@ import java.util.Locale;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AddTaskActivity extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity
+        implements CalendarDatePickerDialogFragment.OnDateSetListener{
 
     private FancyButton mUrgentBtn;
     private FancyButton mImportantBtn;
@@ -36,10 +36,10 @@ public class AddTaskActivity extends AppCompatActivity {
     private static final int CHOSEN_DATE = 2;
     private int mCurrentDateState = TODAY_DATE;
 
-    private Date mTaskDate;
-    private Date mTodayDate;
-    private Date mTomorrowDate;
-    private Date mChosenDate;
+    private Calendar mTaskDate;
+//    private Calendar mTodayDate;
+//    private Calendar mTomorrowDate;
+//    private Calendar mChosenDate;
     private FancyButton mTodayDateBtn;
     private FancyButton mTomorrowDateBtn;
     private FancyButton mChosenDateBtn;
@@ -55,7 +55,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private SQLiteDatabase db;
 
-
+    private static final String FRAG_TAG_DATE_PICKER = "fragment_date_picker";
 
 
     public void hideKeyboard(View view) {
@@ -86,12 +86,12 @@ public class AddTaskActivity extends AppCompatActivity {
         mActiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryActive);
         mPassiveColor = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryPassive);
 
-        mTodayDate = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        mTomorrowDate = cal.getTime();
-        mTaskDate = mTodayDate;
-
+//        mTodayDate = new Date();
+//        Calendar cal = Calendar.getInstance();
+//        cal.add(Calendar.DAY_OF_MONTH, 1);
+//        mTomorrowDate = cal.getTime();
+//        mTaskDate = mTodayDate;
+        mTaskDate = Calendar.getInstance();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -170,18 +170,18 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // Dating
-        final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
-        wheelDayPicker.setCurved(true);
-        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mCurrentDateState = CHOSEN_DATE;
-                mTodayDateBtn.setBackgroundColor(mPassiveColor);
-                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
-                mChosenDateBtn.setBackgroundColor(mActiveColor);
-                return false;
-            }
-        });
+//        final WheelDayPicker wheelDayPicker = (WheelDayPicker) findViewById(R.id.single_day_picker);
+//        wheelDayPicker.setCurved(true);
+//        wheelDayPicker.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                mCurrentDateState = CHOSEN_DATE;
+//                mTodayDateBtn.setBackgroundColor(mPassiveColor);
+//                mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
+//                mChosenDateBtn.setBackgroundColor(mActiveColor);
+//                return false;
+//            }
+//        });
 
         mTodayDateBtn = (FancyButton) findViewById(R.id.today_date_btn);
         mTomorrowDateBtn = (FancyButton) findViewById(R.id.tomorrow_date_btn);
@@ -194,6 +194,7 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TODAY_DATE;
+                mTaskDate = Calendar.getInstance();
                 mTodayDateBtn.setBackgroundColor(mActiveColor);
                 mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
                 mChosenDateBtn.setBackgroundColor(mPassiveColor);
@@ -203,6 +204,8 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mCurrentDateState = TOMORROW_DATE;
+                mTaskDate = Calendar.getInstance();
+                mTaskDate.add(Calendar.DAY_OF_YEAR, 1);
                 mTodayDateBtn.setBackgroundColor(mPassiveColor);
                 mTomorrowDateBtn.setBackgroundColor(mActiveColor);
                 mChosenDateBtn.setBackgroundColor(mPassiveColor);
@@ -215,6 +218,11 @@ public class AddTaskActivity extends AppCompatActivity {
                 mTodayDateBtn.setBackgroundColor(mPassiveColor);
                 mTomorrowDateBtn.setBackgroundColor(mPassiveColor);
                 mChosenDateBtn.setBackgroundColor(mActiveColor);
+                CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
+                        .setOnDateSetListener(AddTaskActivity.this)
+                        .setThemeCustom(R.style.CustomDateTimePickerThemeStyle);
+                cdp.show(getSupportFragmentManager(), FRAG_TAG_DATE_PICKER);
+
             }
         });
         ///////////
@@ -235,23 +243,23 @@ public class AddTaskActivity extends AppCompatActivity {
                 else if (mIsImportant)
                     priority = 2;
 
-                switch (mCurrentDateState) {
-                    case TODAY_DATE:
-                        mTaskDate = mTodayDate;
-                        break;
-                    case TOMORROW_DATE:
-                        mTaskDate = mTomorrowDate;
-                        break;
-                    case CHOSEN_DATE:
-                        mTaskDate = wheelDayPicker.getCurrentDate();
-                        break;
-                    default:
-                        mTaskDate = mTodayDate;
-                        break;
-                }
+//                switch (mCurrentDateState) {
+//                    case TODAY_DATE:
+//                        mTaskDate = mTodayDate;
+//                        break;
+//                    case TOMORROW_DATE:
+//                        mTaskDate = mTomorrowDate;
+//                        break;
+////                    case CHOSEN_DATE:
+////                        mTaskDate = wheelDayPicker.getCurrentDate();
+////                        break;
+//                    default:
+//                        mTaskDate = mTodayDate;
+//                        break;
+//                }
 
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                String formatted = format.format(mTaskDate);
+                String formatted = format.format(mTaskDate.getTime());
 
                 ContentValues values = new ContentValues();
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, title);
@@ -276,5 +284,10 @@ public class AddTaskActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         finish();
 //        super.onBackPressed();
+    }
+
+    @Override
+    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+        mTaskDate.set(year, monthOfYear, dayOfMonth);
     }
 }
