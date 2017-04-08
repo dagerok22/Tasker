@@ -11,7 +11,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="0dp"
+        android:padding="0dp"
         android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,7 +20,16 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:elevation="0dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:padding="0dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

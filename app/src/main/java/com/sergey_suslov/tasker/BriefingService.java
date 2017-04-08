@@ -56,8 +56,9 @@ public class BriefingService extends Service {
         mLargeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_list);
         mId = 1;
         mSharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        startLoop();
-        return super.onStartCommand(intent, flags, startId);
+        ServiceThread serviceThread = new ServiceThread();
+        new Thread(serviceThread).start();
+        return START_REDELIVER_INTENT;
     }
 
     private void updateShownDate(){
@@ -67,15 +68,48 @@ public class BriefingService extends Service {
         editor.commit();
     }
 
+    private class ServiceThread implements Runnable {
+
+        @Override
+        public void run() {
+            mCalendar = Calendar.getInstance();
+            Integer currentTimeInMins;
+            Integer briefTime;
+            Integer lastTimeShown;
+            Integer currentDayOfYear;
+            while (true) {
+                Log.d("LoopeThred", "");
+                currentTimeInMins = mCalendar.get(Calendar.HOUR_OF_DAY) * 60 + mCalendar.get(Calendar.MINUTE);
+                briefTime = mSharedPreferences.getInt(getString(R.string.preference_saved_briefing_time),
+                        Integer.valueOf(getString(R.string.preference_saved_briefing_time_default)));
+                lastTimeShown = mSharedPreferences.getInt(getString(R.string.briefing_last_time_shown_date), -1);
+                currentDayOfYear = mCalendar.get(Calendar.DAY_OF_YEAR);
+                Log.d("LoopeThred", String.valueOf(currentTimeInMins >= briefTime) +
+                        String.valueOf(Math.abs(lastTimeShown - currentDayOfYear) != 0));
+                Log.d("LoopeThred", String.valueOf(lastTimeShown) + " " +
+                        String.valueOf(currentDayOfYear));
+                Log.d("LoopeThred", String.valueOf(currentTimeInMins) + " " +
+                        String.valueOf(briefTime));
+                if (currentTimeInMins >= briefTime && Math.abs(lastTimeShown - currentDayOfYear) != 0) {
+                    sendNotification();
+                    updateShownDate();
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     private void startLoop(){
         mCalendar = Calendar.getInstance();
         Integer currentTimeInMins;
         Integer briefTime;
         Integer lastTimeShown;
         Integer currentDayOfYear;
-        long curT = System.currentTimeMillis();
-        long endT = System.currentTimeMillis() + 20000;
-        while (curT < endT){
+        while (true) {
             Log.d("LoopeThred", "");
             currentTimeInMins = mCalendar.get(Calendar.HOUR_OF_DAY) * 60 + mCalendar.get(Calendar.MINUTE);
             briefTime = mSharedPreferences.getInt(getString(R.string.preference_saved_briefing_time),

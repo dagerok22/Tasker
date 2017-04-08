@@ -29,7 +29,6 @@
             fancy:fb_iconResource="@drawable/ic_002_left_arrow"
             fancy:fb_defaultColor="?android:colorPrimary"
             fancy:fb_fontIconSize="30dp"
-            fancy:fb_iconResource="@drawable/ic_002_left_arrow"
             fancy:fb_text=""
             fancy:fb_textColor="@color/colorPrimaryDark"
             fancy:fb_textGravity="center"

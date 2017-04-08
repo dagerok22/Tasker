@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
-        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_list_notif.png",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xhdpi/ic_list_notif.png"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_monster.png",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/mipmap-xhdpi/ic_monster.png"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/mipmap-xhdpi/transparent_shadow.png",

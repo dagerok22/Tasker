@@ -16,12 +16,12 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_screen_content_include.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/fragment_intro_third.xml",
-        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/layout/fragment_intro_third.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/radial_time_header_label.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/radial_time_header_label.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/fragment_intro_third.xml",
+        "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/layout/fragment_intro_third.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/activity_edit_task.xml",
@@ -44,12 +44,12 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_search_view.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/support_simple_spinner_dropdown_item.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/calendar_date_picker_header_view.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/calendar_date_picker_header_view.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/support_simple_spinner_dropdown_item.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/date_picker_view.xml",
@@ -108,12 +108,12 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/keyboard_with_header.xml",
-        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/keyboard_with_header.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/number_picker_view.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/number_picker_view.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/keyboard_with_header.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/keyboard_with_header.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/expiration_picker_view.xml",
@@ -144,12 +144,12 @@
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/calendar_date_picker_selected_date.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_alert_dialog_material.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/calendar_date_picker_view_animator.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/calendar_date_picker_view_animator.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_alert_dialog_material.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
@@ -220,20 +220,20 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_alert_dialog_button_bar_material.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_screen_simple.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/notification_template_lines_media.xml",
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/notification_template_lines_media.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_action_bar_title_item.xml"
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_screen_simple.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/hms_picker_view.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/hms_picker_view.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_action_bar_title_item.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
@@ -264,12 +264,12 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/keyboard_text.xml",
-        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/keyboard_text.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/fragment_intro_first.xml",
         "source": "/home/sergey/AndroidStudioProjects/Tasker/app/src/main/res/layout/fragment_intro_first.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/keyboard_text.xml",
+        "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/keyboard_text.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/three_keys_view.xml",
@@ -352,20 +352,20 @@
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/hms_picker_dialog.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/notification_template_part_time.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/radial_time_picker_dialog.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/radial_time_picker_dialog.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
-        "source": "/home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/res/layout/design_text_input_password_icon.xml"
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/time_picker_view.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/layout/time_picker_view.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
+        "source": "/home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/res/layout/design_text_input_password_icon.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",

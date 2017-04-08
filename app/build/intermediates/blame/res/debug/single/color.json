@@ -88,12 +88,12 @@
         "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/abc_tint_spinner.xml"
     },
     {
-        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
-        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/switch_thumb_material_light.xml"
-    },
-    {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/dialog_text_color_holo_dark.xml",
         "source": "/home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/res/color/dialog_text_color_holo_dark.xml"
+    },
+    {
+        "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
+        "source": "/home/sergey/.android/build-cache/060538fb5c0be7cacbbd9e5782681da24b5f3200/output/res/color/switch_thumb_material_light.xml"
     },
     {
         "merged": "/home/sergey/AndroidStudioProjects/Tasker/app/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",

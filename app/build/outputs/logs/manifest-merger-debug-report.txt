@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:2:1-75:12
+ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:2:1-76:12
 	package
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:3:5-39
 		INJECTED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml
@@ -13,12 +13,8 @@ ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifes
 	android:versionCode
 		INJECTED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml
 		INJECTED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml
-uses-permission#android.permission.VIBRATE
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:4:5-65
-	android:name
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:4:22-63
 application
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:5:5-73:19
+ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:5:5-74:19
 MERGED from [com.android.support:design:25.1.0] /home/sergey/.android/build-cache/6bdc3d2f389c6230d8eba151775c476934b4044a/output/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:transition:25.1.0] /home/sergey/.android/build-cache/4d587fded12930f191dd4422cb3ef8bfe5d4417d/output/AndroidManifest.xml:22:5-20
 MERGED from [uk.co.chrisjenx:calligraphy:2.2.0] /home/sergey/.android/build-cache/31bb5a2fbe86df6242837655ae780fb8a3991742/output/AndroidManifest.xml:11:5-20
@@ -45,7 +41,7 @@ MERGED from [com.android.support:support-compat:25.2.0] /home/sergey/.android/bu
 	android:allowBackup
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:6:9-35
 	android:icon
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:7:9-43
+		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:7:9-42
 	android:theme
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:10:9-40
 activity#com.sergey_suslov.tasker.TasksActivity
@@ -110,7 +106,7 @@ MERGED from [com.google.android.gms:play-services-basement:9.8.0] /home/sergey/.
 	android:name
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:57:13-58
 activity#com.sergey_suslov.tasker.NewTaskActivity
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:60:9-66:56
+ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:60:9-66:47
 	android:screenOrientation
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:65:13-49
 	android:label
@@ -124,19 +120,19 @@ ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifes
 	android:name
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:61:13-44
 activity#com.sergey_suslov.tasker.EditTaskActivity
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:67:9-63
+ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:67:9-54
 	android:name
 		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:67:19-51
 service#com.sergey_suslov.tasker.BriefingService
-ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:68:9-72:55
+ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:69:9-73:47
 	android:enabled
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:70:13-35
+		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:71:13-35
 	android:process
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:72:13-44
+		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:73:13-44
 	android:exported
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:71:13-36
+		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:72:13-36
 	android:name
-		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:69:13-44
+		ADDED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml:70:13-44
 uses-sdk
 INJECTED from /home/sergey/AndroidStudioProjects/Tasker/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.code-troopers.betterpickers:library:3.1.0] /home/sergey/.android/build-cache/78639de7aa34fc5fb1a613242e37ba6d49783f28/output/AndroidManifest.xml:8:5-10:41
